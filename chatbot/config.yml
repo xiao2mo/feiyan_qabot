@@ -1,0 +1,21 @@
+language: zh
+pipeline:
+- name: JiebaTokenizer
+- name: rasa_nlu_gao.featurizers.bert_vectors_featurizer.BertVectorsFeaturizer
+  ip: 127.0.0.1
+  port: 5555
+  port_out: 5556
+  show_server_config: false
+  timeout: 100000
+- name: rasa_nlu_gao.classifiers.embedding_bert_intent_classifier.EmbeddingBertIntentClassifier
+- name: CRFEntityExtractor
+- name: EntitySynonymMapper
+- name: ResponseSelector
+policies:
+- name: MemoizationPolicy
+- name: MappingPolicy
+- name: EmbeddingPolicy
+- name: FallbackPolicy
+  nlu_threshold: 0.4
+  ambiguity_threshold: 0.08
+  core_threshold: 0.3

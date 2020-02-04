@@ -1,0 +1,24 @@
+intents:
+- greet
+- goodbye
+- help
+- faq:
+    triggers: respond_faq
+templates:
+  utter_greet:
+  - text: 您好呀！
+  - text: 您好！
+  utter_what_can_do:
+  - text: 关于新型冠状病毒相关的问题，您都可以问我。
+  utter_goodbye:
+  - text: 再见～
+  - text: 拜拜～
+  utter_default:
+  - text: 我不太明您什么意思。您可以问我：如何预防新型冠状病毒感染？
+  - text: 我不太明您什么意思。您可以问我：出现什么症状需要就医？
+actions:
+- utter_greet
+- utter_goodbye
+- utter_what_can_do
+- utter_default
+- respond_faq
