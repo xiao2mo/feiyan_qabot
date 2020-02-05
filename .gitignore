@@ -4,5 +4,5 @@ __pycache__/
 raw_data/
 voices/
 .DS_Store
-chinese_L-12_H-768_A-12/
+bert_pre_models/
 models/
