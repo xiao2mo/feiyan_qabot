@@ -4,13 +4,14 @@ from flask import Flask, request
 import json
 import requests
 import pymongo
+from utils.base_function import search_related_questions
 
 CHATBOT_URL = "http://localhost:5005/webhooks/rest/webhook"
 MONGO_HOST = "mongodb://127.0.0.1:27017/"
 
 app = Flask(__name__)
-mongo_client = pymongo.MongoClient(host=MONGO_HOST)
-mongo_rasa = mongo_client.rasa.conversations
+MONGO_CLIENT = pymongo.MongoClient(host=MONGO_HOST)
+MONGO_RASA = MONGO_CLIENT.rasa.conversations
 
 @app.route('/send', methods=['POST'])
 def send_message():
@@ -37,7 +38,7 @@ def get_conversation(sender):
     """ 根据用户id，获取对话内容
     @param sender(str): 用户id
     """
-    conversation = mongo_rasa.find_one({"sender_id":sender})
+    conversation = MONGO_RASA.find_one({"sender_id":sender})
     if not conversation:
         err_msg = "找不到该用户的对话"
         return error_return(err_msg)
@@ -50,7 +51,22 @@ def get_conversation(sender):
 def get_conversations_list():
     """ 获取对话列表
     """
-    data = [{"sender": one["sender_id"]} for one in mongo_rasa.find()]
+    data = [{"sender": one["sender_id"]} for one in MONGO_RASA.find()]
+    return data_return(data)
+
+@app.route('/suggest', methods=['POST'])
+def get_suggest_questions():
+    """ 根据输入的问题，获取关联的前k个问题
+    @param question(str): 输入的问题
+    @param top(int): 关联的前k个问题，默认为5
+    """
+    question = request.form.get("question", None)
+    top_k = request.form.get("top", 5)
+    if not question:
+        err_msg = "输入的问题不能为空"
+        return error_return(err_msg)
+    questions_list = search_related_questions(question, top_k)
+    data = {"suggest": questions_list}
     return data_return(data)
  
 def get_messages_from_events(events):

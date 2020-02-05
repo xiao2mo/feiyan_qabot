@@ -6,3 +6,4 @@ voices/
 .DS_Store
 bert_pre_models/
 models/
+custom_dict/
