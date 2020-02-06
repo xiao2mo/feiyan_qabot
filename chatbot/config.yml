@@ -1,7 +1,7 @@
 language: zh
 pipeline:
 - name: JiebaTokenizer
-  dictionary_path: "custom_dict"
+  dictionary_path: custom_dict
 - name: rasa_nlu_gao.featurizers.bert_vectors_featurizer.BertVectorsFeaturizer
   ip: 127.0.0.1
   port: 5555
@@ -12,6 +12,8 @@ pipeline:
 - name: CRFEntityExtractor
 - name: EntitySynonymMapper
 - name: ResponseSelector
+  retrieval_intent: faq
+  # epochs: 200
 policies:
 - name: MemoizationPolicy
 - name: MappingPolicy
