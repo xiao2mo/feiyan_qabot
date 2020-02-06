@@ -5,9 +5,7 @@ import json
 import requests
 import pymongo
 from utils.base_function import search_related_questions
-
-CHATBOT_URL = "http://localhost:5005/webhooks/rest/webhook"
-MONGO_HOST = "mongodb://127.0.0.1:27017/"
+from utils.constants import CHATBOT_URL, MONGO_HOST
 
 app = Flask(__name__)
 MONGO_CLIENT = pymongo.MongoClient(host=MONGO_HOST)
