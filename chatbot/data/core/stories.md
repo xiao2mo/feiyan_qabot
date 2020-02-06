@@ -9,3 +9,8 @@
 ## help_sotry
 * help
     - utter_what_can_do
+
+## faq_story
+* faq
+    - respond_faq
+    - utter_what_can_do

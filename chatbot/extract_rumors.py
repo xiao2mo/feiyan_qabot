@@ -24,7 +24,7 @@ NORMAL_FILE = os.path.join(EDA_PATH, 'rumor.txt')
 AUGMENT_FILE = os.path.join(EDA_PATH, 'rumor_augmented.txt')
 
 # EDA常量
-NUM_AUG = 3 # 一条数据增强次数。
+NUM_AUG = 2 # 一条数据增强次数。
 ALPHA = 0.05 # 替换的百分比
 
 def get_rumors():

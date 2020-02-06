@@ -13,7 +13,6 @@ pipeline:
 - name: EntitySynonymMapper
 - name: ResponseSelector
   retrieval_intent: faq
-  # epochs: 200
 policies:
 - name: MemoizationPolicy
 - name: MappingPolicy

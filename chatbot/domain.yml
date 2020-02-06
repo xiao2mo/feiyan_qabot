@@ -2,8 +2,7 @@ intents:
 - greet
 - goodbye
 - help
-- faq:
-    triggers: respond_faq
+- faq
 templates:
   utter_greet:
   - text: 您好呀！
